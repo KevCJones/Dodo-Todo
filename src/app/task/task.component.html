@@ -1,13 +1,14 @@
-<div *ngIf="!isEditing" class="task-item">
-  <input class="task-checkbox" type="checkbox" id="todo-is-done"
+<div *ngIf="!isEditing" class="task-item" [class.task-done]="done" [class.task-deleted]="task.deleted">
+  <input class="done-checkbox" type="checkbox" id="done-checkbox"
          [(ngModel)]="done" [checked]="done">
-  <label for="todo-is-done" class="task-label" [class.task-done]="done">{{label}}</label>
-  <button class="task-edit-button" type="button" (click)="editing=true">edit</button>
+  <label for="done-checkbox" class="task-label">{{label}}</label>
+  <button class="edit-btn" type="button" (click)="edit()">edit</button>
+  <button class="delete-btn" type="button" (click)="delete()">delete</button>
 </div>
 <div *ngIf="isEditing" class="task-item">
   <input class="task-input" type="text"
         [(ngModel)]="label"
-        (keyup.enter)="doneEditing()">
-  <button class="task-save-button" type="button" (click)="editing=false">save</button>
+        (keyup.enter)="save()">
+  <button class="task-save-button" type="button" (click)="save()">save</button>
 </div>
 
