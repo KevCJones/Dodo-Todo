@@ -10,20 +10,25 @@ describe('TaskComponent', () => {
   let fixture: ComponentFixture<TaskComponent>;
   let element: any;
 
-  function sendInput(inputElement: any, text: string) {
-    inputElement.value = text;
-    inputElement.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-    return fixture.whenStable();
-  }
-
+  // for cleaner test reading
   const helpers = {
     inputField: () => element.querySelector('.task-input'),
     saveButton: () => element.querySelector('.task-save-button'),
-    editButton: () => element.querySelector('.task-edit-button'),
-    checkbox: () => element.querySelector('.task-checkbox'),
+    editButton: () => element.querySelector('.edit-btn'),
+    deleteButton: () => element.querySelector('.delete-btn'),
+    checkbox: () => element.querySelector('.done-checkbox'),
     label: () => element.querySelector('.task-label'),
+    sendInput: (inputElement: any, text: string) => {
+      inputElement.value = text;
+      inputElement.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+      return fixture.whenStable();
+    }
   };
+
+  beforeAll(() => {
+    window.confirm = () => true;
+  });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -45,7 +50,8 @@ describe('TaskComponent', () => {
     component.task = {
       id: 0,
       done: false,
-      label: 'Set Mocked Input'
+      label: 'Set Mocked Input',
+      deleted: false
     };
 
     fixture.detectChanges();
@@ -83,7 +89,7 @@ describe('TaskComponent', () => {
     spyOn(component.change, 'emit');
     helpers.editButton().click();
     fixture.detectChanges();
-    sendInput(helpers.inputField(), 'Inputted Content')
+    helpers.sendInput(helpers.inputField(), 'Inputted Content')
       .then(() => {
         helpers.saveButton().click();
         fixture.detectChanges();
@@ -93,13 +99,19 @@ describe('TaskComponent', () => {
       });
   }));
 
-  it('emit a change event when done is checked', () => {
+  it('should emit a change event when checkbox is clicked', () => {
     spyOn(component.change, 'emit');
     helpers.checkbox().click();
     expect(component.change.emit).toHaveBeenCalledWith(component.task);
   });
 
-  it('not to emit a change event when save is performed with no changes', () => {
+  it('should mark item as done and emit change if the label is clicked', () => {
+    spyOn(component.change, 'emit');
+    helpers.label().click();
+    expect(component.change.emit).toHaveBeenCalled();
+  });
+
+  it('should not to emit a change event when save is performed with no changes', () => {
     spyOn(component.change, 'emit');
     helpers.editButton().click();
     fixture.detectChanges();
@@ -107,9 +119,26 @@ describe('TaskComponent', () => {
     expect(component.change.emit).not.toHaveBeenCalled();
   });
 
-  it('to mark item as done if the label is clicked and fire event', () => {
+  it('should be able to send a delete event', () => {
     spyOn(component.change, 'emit');
-    helpers.label().click();
-    expect(component.change.emit).toHaveBeenCalled();
+    helpers.deleteButton().click();
+    expect(component.task.deleted).toBeTrue();
+    expect(component.change.emit).toHaveBeenCalledWith(component.task);
   });
+
+  it('should delete the task if you save an empty string', () => {
+    spyOn(component.change, 'emit');
+    const beforeDeleteLabel = component.label;
+    helpers.editButton().click();
+    fixture.detectChanges();
+    helpers.sendInput(helpers.inputField(), '')
+      .then(() => {
+        helpers.saveButton().click();
+        fixture.detectChanges();
+        expect(helpers.label().innerText).toBe(beforeDeleteLabel);
+        expect(component.task.deleted).toBeTrue();
+        expect(component.change.emit).toHaveBeenCalledWith(component.task);
+      });
+  });
+
 });
