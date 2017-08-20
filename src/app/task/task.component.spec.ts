@@ -106,4 +106,10 @@ describe('TaskComponent', () => {
     helpers.saveButton().click();
     expect(component.change.emit).not.toHaveBeenCalled();
   });
+
+  it('to mark item as done if the label is clicked and fire event', () => {
+    spyOn(component.change, 'emit');
+    helpers.label().click();
+    expect(component.change.emit).toHaveBeenCalled();
+  });
 });
