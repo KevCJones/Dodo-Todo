@@ -1,3 +1,5 @@
+import { TaskStoreService } from './../../services/task-store/task-store.service';
+import { TaskStoreModule } from './../../services/task-store/task-store.module';
 import { ITask } from './../../services/task-store/itask';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TaskComponent } from './../task/task.component';
@@ -29,9 +31,9 @@ describe('TaskListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FormsModule],
+      imports: [ReactiveFormsModule, FormsModule, TaskStoreModule.forRoot()],
       declarations: [TaskListComponent],
-      providers: [FormBuilder],
+      providers: [FormBuilder, TaskStoreService],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();

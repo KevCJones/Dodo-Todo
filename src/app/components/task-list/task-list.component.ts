@@ -1,20 +1,22 @@
+import { TaskStoreService } from './../../services/task-store/task-store.service';
 import { ITask } from './../../services/task-store/itask';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent implements OnInit, OnDestroy {
 
   myForm: FormGroup;
   newItemControl: AbstractControl;
+  tasks: Array<ITask> = [];
+  subscription: Subscription;
 
-  @Input() tasks: Array<ITask>;
-
-  constructor(public fb: FormBuilder) { }
+  constructor(public fb: FormBuilder, public taskService: TaskStoreService) { }
 
   ngOnInit() {
     this.myForm = this.fb.group({
@@ -22,16 +24,24 @@ export class TaskListComponent implements OnInit {
     });
 
     this.newItemControl = this.myForm.controls['newItemControl'];
+    this.taskService.loadTasks();
+    this.taskService.tasks$.subscribe( tasks => {
+      this.tasks = tasks;
+    });
   }
 
   onSubmit(value: {newItemControl}): void {
-    const task: ITask = {
-      id: Date.now(),
-      label: value.newItemControl,
-      deleted: false,
-      done: false
-    };
-    this.tasks.push(task);
+    this.taskService.addTask(value.newItemControl);
+  }
+
+  updateTask(task: ITask) {
+    this.taskService.updateTask(task);
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

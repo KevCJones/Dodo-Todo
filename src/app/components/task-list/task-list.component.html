@@ -5,6 +5,6 @@
  	<button #addButton type="submit" class="add-task-button" [disabled]="!myForm.valid">Add Item</button>
 </form>
 <ul>
-  <app-task *ngFor="let task of tasks" [task]="task"></app-task>
+  <app-task *ngFor="let task of tasks" [task]="task" (changed)="updateTask($event)"></app-task>
 </ul>
 
