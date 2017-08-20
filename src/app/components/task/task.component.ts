@@ -27,6 +27,10 @@ export class TaskComponent implements OnInit {
     this.emitChange();
   }
 
+  get done() {
+    return this.task.done;
+  }
+
   edit() {
     this.isEditing = true;
     this.beforeEditing = this.task.label;

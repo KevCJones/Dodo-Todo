@@ -102,6 +102,7 @@ describe('TaskComponent', () => {
   it('should emit a change event when checkbox is clicked', () => {
     spyOn(component.changed, 'emit');
     helpers.checkbox().click();
+    fixture.detectChanges();
     expect(component.changed.emit).toHaveBeenCalledWith(component.task);
   });
 
