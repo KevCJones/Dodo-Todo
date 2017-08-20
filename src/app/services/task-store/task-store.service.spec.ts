@@ -52,6 +52,25 @@ describe('TaskStoreService', () => {
       });
   });
 
+  it('should edit a task to the store', done => {
+    const originalTask = service.addTask('Added');
+    const expectedLabels = ['Added', 'Edited'];
+    let index = 0;
+    service.tasks$
+      .skip(1)
+      .take(expectedLabels.length)
+      .subscribe(tasks => {
+        console.log(tasks);
+        expect(tasks[0].label).toEqual(expectedLabels[index++]);
+        if (index === expectedLabels.length) {
+          done();
+        }else {
+          originalTask.label = 'Edited';
+          service.updateTask(originalTask);
+        }
+      });
+  });
+
   it('should allow a task to be deleted from store', done => {
     const taskCreated = service.addTask('Task adding');
     const expectedSizes = [1, 0];
