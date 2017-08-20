@@ -21,35 +21,46 @@ export class TaskComponent implements OnInit {
 
   ngOnInit() {}
 
+  // bound to ngModels works nicer with a get set combo
   set label( label: string) {
     this.task.label = label;
   }
-
   get label(): string {
     return this.task.label;
   }
 
   set done( isDone: boolean) {
     this.task.done = isDone;
-    this.change.emit(this.task);
+    this.emitChange();
   }
-
   get done() {
     return this.task.done;
   }
 
-  set editing(isEditing) {
-    this.isEditing = isEditing;
-    if (!isEditing && (this.label !== this.beforeEditing)) {
-      this.change.emit(this.task);
-    } else if (isEditing) {
-      this.isEditing = true;
+  edit() {
+    this.isEditing = true;
     this.beforeEditing = this.label;
+  }
+
+  save() {
+    this.isEditing = false;
+    if (!this.label.length) {
+      this.task.label = this.beforeEditing;
+      this.delete();
+    } else if (this.label !== this.beforeEditing) {
+      this.emitChange();
     }
   }
 
-  get editing() {
-    return this.isEditing;
+  delete() {
+    if (confirm('You are going to delete this task')) {
+      this.task.deleted = true;
+      this.emitChange();
+    }
+  }
+
+  emitChange() {
+    this.change.emit(this.task);
   }
 
 }
