@@ -1,4 +1,4 @@
-import { ITask } from './itask';
+import { ITask } from './../../services/task-store/itask';
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 
 /*
@@ -17,37 +17,27 @@ export class TaskComponent implements OnInit {
   private beforeEditing: string;
   private isEditing = false;
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {}
-
-  // bound to ngModels works nicer with a get set combo
-  set label( label: string) {
-    this.task.label = label;
-  }
-  get label(): string {
-    return this.task.label;
-  }
 
   set done( isDone: boolean) {
     this.task.done = isDone;
     this.emitChange();
   }
-  get done() {
-    return this.task.done;
-  }
 
   edit() {
     this.isEditing = true;
-    this.beforeEditing = this.label;
+    this.beforeEditing = this.task.label;
   }
 
   save() {
     this.isEditing = false;
-    if (!this.label.length) {
+    if (!this.task.label.length) {
       this.task.label = this.beforeEditing;
       this.delete();
-    } else if (this.label !== this.beforeEditing) {
+    } else if (this.task.label !== this.beforeEditing) {
       this.emitChange();
     }
   }

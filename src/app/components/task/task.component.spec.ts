@@ -1,5 +1,4 @@
 import { FormsModule } from '@angular/forms';
-import { ITask } from './itask';
 import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 
 
@@ -33,9 +32,6 @@ describe('TaskComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      providers: [
-        { provide: 'ITask', useValue: {} }
-      ],
       declarations: [TaskComponent]
     })
       .compileComponents();
@@ -60,6 +56,11 @@ describe('TaskComponent', () => {
 
   it('should be created', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should throw an error if task is not valid', () => {
+    component.task = null;
+    expect(component).toThrowAnyError();
   });
 
   it('should have a label which is reflected to html', () => {

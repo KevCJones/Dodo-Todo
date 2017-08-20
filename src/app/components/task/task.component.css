@@ -1,3 +1,7 @@
+.task-li{
+  list-style: none;
+}
+
 .task-done {
   text-decoration: line-through;
 }
