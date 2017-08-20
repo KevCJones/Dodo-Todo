@@ -79,7 +79,8 @@ describe('TaskComponent', () => {
     });
   });
 
-  it('should be able to save changes', fakeAsync(() => {
+  it('should be able to save changes and emit change event', fakeAsync(() => {
+    spyOn(component.change, 'emit');
     helpers.editButton().click();
     fixture.detectChanges();
     sendInput(helpers.inputField(), 'Inputted Content')
@@ -88,14 +89,21 @@ describe('TaskComponent', () => {
         fixture.detectChanges();
         expect(helpers.label().innerText).toBe('Inputted Content');
         expect(component.label).toBe('Inputted Content');
+        expect(component.change.emit).toHaveBeenCalledWith(component.task);
       });
   }));
 
   it('emit a change event when done is checked', () => {
     spyOn(component.change, 'emit');
     helpers.checkbox().click();
-    expect(component.change.emit).toHaveBeenCalled();
     expect(component.change.emit).toHaveBeenCalledWith(component.task);
   });
 
+  it('not to emit a change event when save is performed with no changes', () => {
+    spyOn(component.change, 'emit');
+    helpers.editButton().click();
+    fixture.detectChanges();
+    helpers.saveButton().click();
+    expect(component.change.emit).not.toHaveBeenCalled();
+  });
 });

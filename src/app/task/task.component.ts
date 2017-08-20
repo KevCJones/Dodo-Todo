@@ -10,6 +10,7 @@ export class TaskComponent implements OnInit {
 
   @Input() task: ITask;
   @Output() change: EventEmitter<ITask> = new EventEmitter();
+  beforeEditing: string;
   isEditing = false;
 
   constructor() {}
@@ -35,11 +36,14 @@ export class TaskComponent implements OnInit {
 
   doneEditing() {
     this.isEditing = false;
-    this.change.emit(this.task);
+    if (this.label !== this.beforeEditing) {
+      this.change.emit(this.task);
+    }
   }
 
   startEditing() {
     this.isEditing = true;
+    this.beforeEditing = this.label;
   }
 
 }
