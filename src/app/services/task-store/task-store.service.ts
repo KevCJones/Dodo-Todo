@@ -48,6 +48,10 @@ export class TaskStoreService {
 
   updateTask(taskToUpdate: ITask) {
     const tasks = this.tasks$.value.filter( task => task.id !== taskToUpdate.id);
+    if (taskToUpdate.deleted) {
+      this.deleteTask(taskToUpdate);
+      return;
+    }
     tasks.push(taskToUpdate);
     this.warehouse.set(this.storeKey, tasks)
       .take(1)
