@@ -91,4 +91,11 @@ describe('TaskComponent', () => {
       });
   }));
 
+  it('emit a change event when done is checked', () => {
+    spyOn(component.change, 'emit');
+    helpers.checkbox().click();
+    expect(component.change.emit).toHaveBeenCalled();
+    expect(component.change.emit).toHaveBeenCalledWith(component.task);
+  });
+
 });
