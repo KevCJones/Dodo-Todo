@@ -86,7 +86,7 @@ describe('TaskComponent', () => {
   });
 
   it('should be able to save changes and emit change event', fakeAsync(() => {
-    spyOn(component.change, 'emit');
+    spyOn(component.changed, 'emit');
     helpers.editButton().click();
     fixture.detectChanges();
     helpers.sendInput(helpers.inputField(), 'Inputted Content')
@@ -95,39 +95,39 @@ describe('TaskComponent', () => {
         fixture.detectChanges();
         expect(helpers.label().innerText).toBe('Inputted Content');
         expect(component.task.label).toBe('Inputted Content');
-        expect(component.change.emit).toHaveBeenCalledWith(component.task);
+        expect(component.changed.emit).toHaveBeenCalledWith(component.task);
       });
   }));
 
   it('should emit a change event when checkbox is clicked', () => {
-    spyOn(component.change, 'emit');
+    spyOn(component.changed, 'emit');
     helpers.checkbox().click();
-    expect(component.change.emit).toHaveBeenCalledWith(component.task);
+    expect(component.changed.emit).toHaveBeenCalledWith(component.task);
   });
 
   it('should mark item as done and emit change if the label is clicked', () => {
-    spyOn(component.change, 'emit');
+    spyOn(component.changed, 'emit');
     helpers.label().click();
-    expect(component.change.emit).toHaveBeenCalled();
+    expect(component.changed.emit).toHaveBeenCalled();
   });
 
   it('should not to emit a change event when save is performed with no changes', () => {
-    spyOn(component.change, 'emit');
+    spyOn(component.changed, 'emit');
     helpers.editButton().click();
     fixture.detectChanges();
     helpers.saveButton().click();
-    expect(component.change.emit).not.toHaveBeenCalled();
+    expect(component.changed.emit).not.toHaveBeenCalled();
   });
 
   it('should be able to send a delete event', () => {
-    spyOn(component.change, 'emit');
+    spyOn(component.changed, 'emit');
     helpers.deleteButton().click();
     expect(component.task.deleted).toBeTrue();
-    expect(component.change.emit).toHaveBeenCalledWith(component.task);
+    expect(component.changed.emit).toHaveBeenCalledWith(component.task);
   });
 
   it('should delete the task if you save an empty string', () => {
-    spyOn(component.change, 'emit');
+    spyOn(component.changed, 'emit');
     const beforeDeleteLabel = component.task.label;
     helpers.editButton().click();
     fixture.detectChanges();
@@ -137,7 +137,7 @@ describe('TaskComponent', () => {
         fixture.detectChanges();
         expect(helpers.label().innerText).toBe(beforeDeleteLabel);
         expect(component.task.deleted).toBeTrue();
-        expect(component.change.emit).toHaveBeenCalledWith(component.task);
+        expect(component.changed.emit).toHaveBeenCalledWith(component.task);
       });
   });
 
