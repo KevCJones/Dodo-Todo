@@ -1,8 +1,4 @@
-.task-li{
-  list-style: none;
-}
-
-.task-done {
+.task-done label span.task-label {
   text-decoration: line-through;
 }
 
@@ -13,7 +9,30 @@
   pointer-events: none;
 }
 
-.task-done .edit-btn,
-.task-deleted .edit-btn, .task-deleted .delete-btn {
-  display: none;
+.task-done .edit-btn, .task-deleted .edit-btn, .task-deleted .delete-btn {
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.task-item .checkbox label {
+  float: left;
+  padding-top: 8px;
+}
+
+input[type="checkbox"] {
+  transform: scale(2, 2);
+}
+
+.task-item-edit {
+  padding: 5px 0;
+}
+
+.task-item-edit .task-input {
+  border: 1px solid #eee;
+  height: 33px;
+}
+
+.form-control {
+  border: 0 solid transparent;
+  box-shadow: none;
 }

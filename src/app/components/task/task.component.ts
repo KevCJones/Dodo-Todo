@@ -14,8 +14,8 @@ export class TaskComponent implements OnInit {
 
   @Input() task: ITask;
   @Output() changed: EventEmitter<ITask> = new EventEmitter();
+  isEditing = false;
   private beforeEditing: string;
-  private isEditing = false;
 
   constructor() {
   }
@@ -54,6 +54,7 @@ export class TaskComponent implements OnInit {
   }
 
   emitChange() {
+    console.log(`Task Updated: ${this.task.label} - ${this.task.done}`);
     this.changed.emit(this.task);
   }
 

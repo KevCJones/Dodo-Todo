@@ -22,10 +22,9 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.myForm = this.fb.group({
       'newItemControl': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])]
     });
-
     this.newItemControl = this.myForm.controls['newItemControl'];
     this.taskService.loadTasks();
-    this.taskService.tasks$.subscribe( tasks => {
+    this.subscription = this.taskService.tasks$.subscribe( tasks => {
       this.tasks = tasks;
     });
   }
@@ -40,7 +39,10 @@ export class TaskListComponent implements OnInit, OnDestroy {
   }
 
   deleteCompleted() {
-    this.taskService.tasks = this.tasks.filter(task => !task.done );
+    const deletingCount = this.tasks.filter(task => task.done ).length;
+    if (confirm(`Are you sure you want to delete ${deletingCount} items`)) {
+      this.taskService.tasks = this.tasks.filter(task => !task.done );
+    }
   }
 
   canDeleteCompleted() {

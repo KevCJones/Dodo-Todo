@@ -1,0 +1,12 @@
+
+.input-group{
+  margin: auto;
+}
+
+.task-list-container {
+  padding: 15px 0;
+}
+
+.hide-delete {
+  visibility: hidden;
+}

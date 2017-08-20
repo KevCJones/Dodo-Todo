@@ -1,15 +1,28 @@
-<li class="task-li">
-  <div *ngIf="!isEditing" class="task-item" [class.task-done]="done" [class.task-deleted]="task.deleted">
-    <input class="done-checkbox" type="checkbox" [id]="'done-checkbox-'+task.id"
-          [(ngModel)]="done" [checked]="done">
-    <label [for]="'done-checkbox-'+task.id" class="task-label">{{task.label}}</label>
-    <button class="edit-btn" type="button" (click)="edit()">edit</button>
-    <button class="delete-btn" type="button" (click)="delete()">delete</button>
+
+<div class="row">
+  <div *ngIf="!isEditing" class="task-item input-group col col-lg-8" [class.task-done]="done" [class.task-deleted]="task.deleted">
+    <div class="checkbox form-control">
+      <label><input class="done-checkbox" type="checkbox" [id]="'done-checkbox-'+task.id"
+          [(ngModel)]="done" [checked]="done"><span class="task-label">{{task.label}}</span></label>
+    </div>
+    <div class="input-group-btn">
+      <button class="btn btn-primary edit-btn btn-link" type="button" (click)="edit()">
+        <span class="glyphicon glyphicon-edit glyph"></span>
+      </button>
+      <button class="btn btn-secondary delete-btn btn-link" type="button" (click)="delete()">
+        <span class="glyphicon glyphicon-trash glyph"></span>
+      </button>
+    </div>
   </div>
-  <div *ngIf="isEditing" class="task-item">
-    <input class="task-input" type="text"
+  <div *ngIf="isEditing" class="task-item-edit input-group col col-lg-8">
+    <input class="task-input form-control" type="text"
           [(ngModel)]="task.label"
           (keyup.enter)="save()">
-    <button class="task-save-button" type="button" (click)="save()">save</button>
+    <span class="input-group-btn">
+      <button class="btn btn-primary task-save-button" type="button" (click)="save()">
+        <span class="glyphicon glyphicon-ok glyph"></span>
+      </button>
+    </span>
   </div>
-</li>
+</div>
+

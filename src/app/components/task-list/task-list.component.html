@@ -1,10 +1,26 @@
-<form class="ui form" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" [class.warning]="!myForm.valid && myForm.dirty">
-  <div class="field" [ngClass]="{'has-error':!newItemControl.valid && newItemControl.touched}">
-			<input type="text" class="add-task-input" name="addItem[input]" [formControl]="newItemControl" required>
+<div class="container">
+  <div class="row">
+    <div class="col col-lg-8 col-lg-offset-2">
+      <form role="form" class="form input-group" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+        <div class="field form-control">
+          <input type="text" class="form-control add-task-input" placeholder="Enter a new task and press '+' or Enter" name="addItem[input]"
+            [formControl]="newItemControl">
+        </div>
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary add-task-button floated right" [disabled]="!myForm.valid">
+            <span class="glyphicon glyphicon-plus glyph"></span>
+        </button>
+        </span>
+      </form>
+    </div>
   </div>
- 	<button #addButton type="submit" class="add-task-button" [disabled]="!myForm.valid">Add Item</button>
-</form>
-<ul class="task-list-container">
-  <app-task *ngFor="let task of tasks" [task]="task" (changed)="updateTask($event)"></app-task>
-</ul>
-<button class="delete-completed-button" [disabled]="!canDeleteCompleted()" (click)="deleteCompleted()">Delete Completed</button>
+  <div class="col col-lg-8 col-lg-offset-2">
+    <div class="task-list-container container">
+      <app-task *ngFor="let task of tasks" [task]="task" (changed)="updateTask($event)"></app-task>
+    </div>
+  </div>
+  <div class="col col-lg-8 col-lg-offset-2" [class.hide-delete]="!canDeleteCompleted()">
+    <button type="button" class="delete-completed-button btn btn-primary btn-lg btn-block" (click)="deleteCompleted()">Remove Completed</button>
+  </div>
+
+</div>

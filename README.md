@@ -22,7 +22,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 > Some additionally set features i would want from a todo app:
 >1. Complete a task
->2. Task removed from list when completed in past (days)
+>2. Task removed from list if you delete one alone or all [completed]
 
 ## Installation
 
@@ -35,10 +35,6 @@ Prerequisite advised is to have [nvm installed ](https://github.com/creationix/n
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
