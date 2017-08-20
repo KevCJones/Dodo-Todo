@@ -13,7 +13,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 export class TaskComponent implements OnInit {
 
   @Input() task: ITask;
-  @Output() change: EventEmitter<ITask> = new EventEmitter();
+  @Output() changed: EventEmitter<ITask> = new EventEmitter();
   private beforeEditing: string;
   private isEditing = false;
 
@@ -50,7 +50,7 @@ export class TaskComponent implements OnInit {
   }
 
   emitChange() {
-    this.change.emit(this.task);
+    this.changed.emit(this.task);
   }
 
 }
