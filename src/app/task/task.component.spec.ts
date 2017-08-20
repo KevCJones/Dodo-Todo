@@ -63,17 +63,16 @@ describe('TaskComponent', () => {
   });
 
   it('should have a label which is reflected to html', () => {
-    expect(component).toHaveMember('label');
-    component.label = 'Label Changed To';
+    component.task.label = 'Label Changed To';
     fixture.detectChanges();
-    expect(helpers.label().innerText).toBe(component.label);
+    expect(helpers.label().innerText).toBe(component.task.label);
   });
 
   it('should have a checkbox that toggles done state', () => {
     helpers.checkbox().click();
     fixture.detectChanges();
     expect(helpers.checkbox().checked).toBe(true);
-    expect(component.done).toBe(true);
+    expect(component.task.done).toBe(true);
   });
 
   it('should have an edit mode which displays current label', () => {
@@ -81,7 +80,7 @@ describe('TaskComponent', () => {
     helpers.editButton().click();
     fixture.detectChanges();
     fixture.whenStable().then(() => {
-      expect(helpers.inputField().value).toBe(component.label);
+      expect(helpers.inputField().value).toBe(component.task.label);
     });
   });
 
@@ -94,7 +93,7 @@ describe('TaskComponent', () => {
         helpers.saveButton().click();
         fixture.detectChanges();
         expect(helpers.label().innerText).toBe('Inputted Content');
-        expect(component.label).toBe('Inputted Content');
+        expect(component.task.label).toBe('Inputted Content');
         expect(component.change.emit).toHaveBeenCalledWith(component.task);
       });
   }));
@@ -128,7 +127,7 @@ describe('TaskComponent', () => {
 
   it('should delete the task if you save an empty string', () => {
     spyOn(component.change, 'emit');
-    const beforeDeleteLabel = component.label;
+    const beforeDeleteLabel = component.task.label;
     helpers.editButton().click();
     fixture.detectChanges();
     helpers.sendInput(helpers.inputField(), '')

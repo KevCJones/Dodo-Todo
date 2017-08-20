@@ -1,3 +1,15 @@
 .task-done {
   text-decoration: line-through;
 }
+
+.task-deleted {
+  text-decoration: line-through;
+  color: #aaa;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.task-done .edit-btn,
+.task-deleted .edit-btn, .task-deleted .delete-btn {
+  display: none;
+}
