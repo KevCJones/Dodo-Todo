@@ -4,7 +4,7 @@
   </div>
  	<button #addButton type="submit" class="add-task-button" [disabled]="!myForm.valid">Add Item</button>
 </form>
-<ul>
+<ul class="task-list-container">
   <app-task *ngFor="let task of tasks" [task]="task" (changed)="updateTask($event)"></app-task>
 </ul>
-
+<button class="delete-completed-button" [disabled]="!canDeleteCompleted()" (click)="deleteCompleted()">Delete Completed</button>

@@ -21,6 +21,8 @@ describe('TaskListComponent', () => {
   const helpers = {
     inputField: () => element.querySelector('.add-task-input'),
     addButton: () => element.querySelector('.add-task-button'),
+    deleteButton: () => element.querySelector('.delete-completed-button'),
+    listContainer: () => element.querySelector('.task-list-container'),
     sendInput: (inputElement: any, text: string) => {
       inputElement.value = text;
       inputElement.dispatchEvent(new Event('input'));
@@ -65,7 +67,6 @@ describe('TaskListComponent', () => {
 
   it('should not let the user submit empty tasks', () => {
     spyOn(component, 'onSubmit');
-    console.log(helpers.addButton());
     helpers.addButton().click();
     fixture.detectChanges();
     expect(component.onSubmit).not.toHaveBeenCalled();
@@ -81,4 +82,16 @@ describe('TaskListComponent', () => {
         expect(component.onSubmit).toHaveBeenCalled();
       });
   }));
+
+  it('should let the user add tasks when a valid input has been added', fakeAsync(() => {
+    spyOn(component, 'onSubmit');
+    helpers.sendInput(helpers.inputField(), 'Added Task')
+      .then(() => {
+        helpers.addButton().click();
+        fixture.detectChanges();
+        expect(component.onSubmit).toHaveBeenCalled();
+      });
+  }));
+
+
 });

@@ -32,10 +32,19 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
   onSubmit(value: {newItemControl}): void {
     this.taskService.addTask(value.newItemControl);
+    this.newItemControl.reset('');
   }
 
   updateTask(task: ITask) {
     this.taskService.updateTask(task);
+  }
+
+  deleteCompleted() {
+    this.taskService.tasks = this.tasks.filter(task => !task.done );
+  }
+
+  canDeleteCompleted() {
+    return this.tasks.filter(task => task.done ).length > 0;
   }
 
   ngOnDestroy() {
