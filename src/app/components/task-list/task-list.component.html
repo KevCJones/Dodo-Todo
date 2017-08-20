@@ -1,0 +1,10 @@
+<form class="ui form" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" [class.warning]="!myForm.valid && myForm.dirty">
+  <div class="field" [ngClass]="{'has-error':!newItemControl.valid && newItemControl.touched}">
+			<input type="text" class="add-task-input" name="addItem[input]" [formControl]="newItemControl" required>
+  </div>
+ 	<button #addButton type="submit" class="add-task-button" [disabled]="!myForm.valid">Add Item</button>
+</form>
+<ul>
+  <app-task *ngFor="let task of tasks" [task]="task"></app-task>
+</ul>
+
