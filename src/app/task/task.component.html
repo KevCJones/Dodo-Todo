@@ -1,0 +1,11 @@
+<div *ngIf="!isEditing" class="task-item">
+  <input class="task-checkbox" type="checkbox" id="todo-is-done" name="done" [(ngModel)]="done" [checked]="done">
+  <label class="task-label" for="todo-is-done" [class.task-done]="done">{{label}}</label>
+  <button class="task-edit-button" type="button" (click)="startEditing()">edit</button>
+</div>
+<div *ngIf="isEditing" class="task-item">
+  <input class="task-input" type="text" name="task-input" [(ngModel)]="label"
+        ng-keydown="$event.keyCode === 13 && doneEditing()">
+  <button class="task-save-button" type="button" (click)="doneEditing()">save</button>
+</div>
+
