@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot"
+    "postinstall": "npm i -g @angular/compiler-cli && ng build --aot"
   },
   "engines": {
     "node": "7.10.1",
