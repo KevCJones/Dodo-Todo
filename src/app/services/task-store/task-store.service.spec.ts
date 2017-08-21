@@ -1,15 +1,11 @@
+import { environment } from './../../../environments/environment';
 import { Warehouse, WarehouseConfig, DRIVER_TYPE, NgxWarehouseModule } from 'ngx-warehouse';
 import { TestBed, inject, async } from '@angular/core/testing';
 
 import { TaskStoreService } from './task-store.service';
 
-const config: WarehouseConfig = {
-  driver: DRIVER_TYPE.LOCALSTORAGE,
-  name: 'Dodotodo_tests2',
-  version: 1.0,
-  storeName: 'dodo_tasks_tests', // Should be alphanumeric, with underscores.
-  description: 'Test version : Todo app you do do daily...'
-};
+const config: WarehouseConfig = environment.storageConfig as WarehouseConfig;
+config.storeName += '_unit_tests_only';
 
 describe('TaskStoreService', () => {
   let service: TaskStoreService;

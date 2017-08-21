@@ -10,17 +10,14 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css']
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent {
 
   @Input() task: ITask;
   @Output() changed: EventEmitter<ITask> = new EventEmitter();
   isEditing = false;
   private beforeEditing: string;
 
-  constructor() {
-  }
-
-  ngOnInit() {}
+  constructor() {}
 
   set done( isDone: boolean) {
     this.task.done = isDone;

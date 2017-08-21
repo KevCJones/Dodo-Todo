@@ -29,7 +29,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSubmit(value: {newItemControl}): void {
+  createTask(value: {newItemControl}): void {
     this.taskService.addTask(value.newItemControl);
     this.newItemControl.reset('');
   }
@@ -38,14 +38,14 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.taskService.updateTask(task);
   }
 
-  deleteCompleted() {
+  deleteCompletedTasks() {
     const deletingCount = this.tasks.filter(task => task.done ).length;
     if (confirm(`Are you sure you want to delete ${deletingCount} items`)) {
       this.taskService.tasks = this.tasks.filter(task => !task.done );
     }
   }
 
-  canDeleteCompleted() {
+  canDeleteCompletedTasks() {
     return this.tasks.filter(task => task.done ).length > 0;
   }
 

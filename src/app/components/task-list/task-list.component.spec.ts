@@ -66,30 +66,30 @@ describe('TaskListComponent', () => {
   });
 
   it('should not let the user submit empty tasks', () => {
-    spyOn(component, 'onSubmit');
+    spyOn(component, 'createTask');
     helpers.addButton().click();
     fixture.detectChanges();
-    expect(component.onSubmit).not.toHaveBeenCalled();
+    expect(component.createTask).not.toHaveBeenCalled();
     expect(component.tasks).not.toEqual( jasmine.objectContaining({label: ''}));
   });
 
   it('should let the user add tasks when a valid input has been added', fakeAsync(() => {
-    spyOn(component, 'onSubmit');
+    spyOn(component, 'createTask');
     helpers.sendInput(helpers.inputField(), 'Added Task')
       .then(() => {
         helpers.addButton().click();
         fixture.detectChanges();
-        expect(component.onSubmit).toHaveBeenCalled();
+        expect(component.createTask).toHaveBeenCalled();
       });
   }));
 
   it('should let the user add tasks when a valid input has been added', fakeAsync(() => {
-    spyOn(component, 'onSubmit');
+    spyOn(component, 'createTask');
     helpers.sendInput(helpers.inputField(), 'Added Task')
       .then(() => {
         helpers.addButton().click();
         fixture.detectChanges();
-        expect(component.onSubmit).toHaveBeenCalled();
+        expect(component.createTask).toHaveBeenCalled();
       });
   }));
 

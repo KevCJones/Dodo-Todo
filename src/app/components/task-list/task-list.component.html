@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col col-lg-8 col-lg-offset-2">
-      <form role="form" class="form input-group" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+      <form role="form" class="form input-group" [formGroup]="myForm" (ngSubmit)="createTask(myForm.value)">
         <div class="field form-control">
           <input type="text" class="form-control add-task-input" placeholder="Enter a new task and press '+' or Enter" name="addItem[input]"
             [formControl]="newItemControl">
@@ -19,8 +19,8 @@
       <app-task *ngFor="let task of tasks" [task]="task" (changed)="updateTask($event)"></app-task>
     </div>
   </div>
-  <div class="col col-lg-8 col-lg-offset-2" [class.hide-delete]="!canDeleteCompleted()">
-    <button type="button" class="delete-completed-button btn btn-primary btn-lg btn-block" (click)="deleteCompleted()">Remove Completed</button>
+  <div class="col col-lg-8 col-lg-offset-2" [class.hide-delete]="!canDeleteCompletedTasks()">
+    <button type="button" class="delete-completed-button btn btn-primary btn-lg btn-block" (click)="deleteCompletedTasks()">Remove Completed</button>
   </div>
 
 </div>

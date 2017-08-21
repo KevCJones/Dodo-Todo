@@ -9,6 +9,10 @@
   pointer-events: none;
 }
 
+.task-label {
+  margin-left: 10px;
+}
+
 .task-done .edit-btn, .task-deleted .edit-btn, .task-deleted .delete-btn {
   pointer-events: none;
   opacity: 0.2;
