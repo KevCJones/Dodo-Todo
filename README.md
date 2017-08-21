@@ -83,3 +83,12 @@ Run `ng test --sourcemaps=false` to execute the unit tests via [Karma](https://k
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
+
+## Future Goals
+
+1. Split form from list
+2. Add user support - Auth0
+3. Store the data via an API / implement Adaptors for store
+4. Add Multiple lists
+5. Add due dates
+6. Archive deleted instead of deleting.
