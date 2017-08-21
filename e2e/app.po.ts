@@ -22,7 +22,7 @@ export class AppPage {
   }
 
   getFirstSaveButton() {
-    return element(by.css('.save-btn'));
+    return element(by.css('.task-save-button'));
   }
 
   getFirstDeleteButton() {
