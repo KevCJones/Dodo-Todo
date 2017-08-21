@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Introduction
 
-> Challenge set - Write an Angular 4 to do list application. 
+> Brief set - Write an Angular 4 to do list application. 
  
 >This application should allow to:
  
@@ -24,6 +24,40 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 > Some additionally set features i would want from a todo app:
 >1. Complete a task
 >2. Task removed from list if you delete one alone or all [completed]
+
+## Stories / Notes pre building
+
+- A user should be able to create a task in the list
+- A user should be able to edit a task in the list
+- A user should be able to mark a task completed
+- A user should be able to unmark a task completed
+- A user should have a way to delete all completed tasks at once
+- A user should be able to delete a single task
+
+### Objects from stories
+
+- User (but going to assume local user support only for now)
+- Task
+- List
+- Store
+
+#### Task :
+- has a label
+- can be done or not done
+- can be edited
+- can be saved after editing
+
+#### List
+- Can render zero or more tasks within it
+- Can capture a new item and save into the store [ might be its own component eventually]
+
+#### Store
+- Contains 0 or more tasks
+- Can create a new task
+- Can save changes over an existing task
+- Can delete a task from the store
+- Can persist its contents (default localStorage - but should be extendable)
+- Can prune the list on startup to save memory for long done tasks
 
 ## Installation
 
