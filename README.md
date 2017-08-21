@@ -3,6 +3,7 @@
 # Dodo 'Doo-Doo' - Another todo app 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.1.
+[A Heroku Demo can be seen here](https://dodo-todo.herokuapp.com/).
 
 ## Introduction
 
