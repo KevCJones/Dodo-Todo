@@ -3,7 +3,7 @@
     <div class="col col-lg-8 col-lg-offset-2">
       <form role="form" class="form input-group" [formGroup]="myForm" (ngSubmit)="createTask(myForm.value)">
         <div class="field form-control">
-          <input type="text" class="form-control add-task-input" placeholder="Enter a new task and press '+' or Enter" name="addItem[input]"
+          <input #inputBox type="text" class="form-control add-task-input" placeholder="Enter a new task and press '+' or Enter" name="addItem[input]"
             [formControl]="newItemControl">
         </div>
         <span class="input-group-btn">
@@ -13,6 +13,10 @@
         </span>
       </form>
     </div>
+  </div>
+  <div class="col col-lg-8 col-lg-offset-2 input-hinter" *ngIf="inputBox.value.length">
+    <span *ngIf="inputBox.value.length <= maxLength">{{inputBox.value.length}} of 140 characters remaining</span>
+    <span *ngIf="inputBox.value.length > maxLength" class="error">This todo has gone the way of the dodo, its too long!</span>
   </div>
   <div class="col col-lg-8 col-lg-offset-2">
     <div class="task-list-container container">

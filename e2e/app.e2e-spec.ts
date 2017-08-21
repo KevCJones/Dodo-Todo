@@ -19,7 +19,7 @@ describe('dodo App', () => {
 
   it('should navigate to the root okay' , () => {
     const title = page.getTitle().getText();
-    expect(title).toEqual('Doo Doo');
+    expect(title).toEqual('Dodo Todo');
   });
 
   it('should display an input form with save button' , () => {

@@ -15,12 +15,13 @@ export class TaskListComponent implements OnInit, OnDestroy {
   newItemControl: AbstractControl;
   tasks: Array<ITask> = [];
   subscription: Subscription;
+  maxLength = 140;
 
   constructor(public fb: FormBuilder, public taskService: TaskStoreService) { }
 
   ngOnInit() {
     this.myForm = this.fb.group({
-      'newItemControl': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])]
+      'newItemControl': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(this.maxLength)])]
     });
     this.newItemControl = this.myForm.controls['newItemControl'];
     this.taskService.loadTasks();

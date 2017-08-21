@@ -1,3 +1,7 @@
+.row {
+  padding-bottom: 20px;
+}
+
 .task-done label span.task-label {
   text-decoration: line-through;
 }
@@ -19,12 +23,15 @@
 }
 
 .task-item .checkbox label {
-  float: left;
-  padding-top: 8px;
+  padding-top: 3px;
+  text-indent: -10px;
+  float: left
 }
 
 input[type="checkbox"] {
   transform: scale(2, 2);
+  position: absolute;
+  top: 17%;
 }
 
 .task-item-edit {
@@ -39,4 +46,13 @@ input[type="checkbox"] {
 .form-control {
   border: 0 solid transparent;
   box-shadow: none;
+}
+
+.checkbox.form-control{
+  display: inherit !important;
+}
+
+.checkbox.form-control label{
+  text-align: left;
+  padding-left: 40px !important;
 }
