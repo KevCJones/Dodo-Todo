@@ -1,16 +1,2 @@
 /* You can add global styles to this file, and also import other style files */
-
-.form-control {
-  padding: 0 0;
-  border: 0;
-  margin: 0;
-  box-shadow: none;
-}
-
-.form-control input {
-  outline: none;
-  outline-style:none;
-  box-shadow:none;
-  border-color:transparent;
-  padding: 0 10px;
-}
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
