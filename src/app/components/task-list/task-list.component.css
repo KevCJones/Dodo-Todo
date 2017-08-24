@@ -9,12 +9,16 @@
 }
 
 .fixed-bottom {
+  overflow-y: hidden;
+  transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
   position: fixed;
   bottom: 0;
 }
 
 .hide {
-  display: none;
+  bottom: -130px;
 }
 
 .tiny-text{
@@ -25,6 +29,6 @@
 }
 
 ::ng-deep .mat-list .mat-list-item .mat-list-item-content {
-    min-height: 48px;
+    min-height: 60px;
     height: auto !important;
 }

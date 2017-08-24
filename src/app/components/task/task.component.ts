@@ -1,6 +1,6 @@
 import { ITask } from './../../services/task-store/itask';
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-
+import { Component, OnInit, Output, Input, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+declare var window: Window;
 /*
   Task Component is as dumb as i can make it. It takes data from a source input, renders it
   watches for editing, marking as done events and emits the new content via a change event
@@ -11,15 +11,16 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent {
-
+  static taskBeingEdited: TaskComponent = null;
   @Input() task: ITask;
   @Output() changed: EventEmitter<ITask> = new EventEmitter();
+  @Output() focused: EventEmitter<boolean> = new EventEmitter();
   isEditing = false;
   private beforeEditing: string;
 
-  constructor() {}
+  constructor(private el: ElementRef) { }
 
-  set done( isDone: boolean) {
+  set done(isDone: boolean) {
     this.task.done = isDone;
     this.emitChange();
   }
@@ -29,12 +30,18 @@ export class TaskComponent {
   }
 
   edit() {
+    if (TaskComponent.taskBeingEdited) {
+      TaskComponent.taskBeingEdited.save();
+    }
+    TaskComponent.taskBeingEdited = this;
     this.isEditing = true;
+    this.focused.emit(true);
     this.beforeEditing = this.task.label;
   }
 
   save() {
     this.isEditing = false;
+    this.focused.emit(false);
     if (!this.task.label.length) {
       this.task.label = this.beforeEditing;
       this.delete();

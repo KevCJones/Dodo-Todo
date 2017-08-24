@@ -6,15 +6,13 @@
     <button md-mini-fab class="delete-btn" (click)="delete()"><md-icon>delete</md-icon></button>
   </div>
   <div *ngIf="isEditing" class="task-item-edit">
-    <p md-line>&#160;</p>
-    <p md-line>&#160;</p>
+    <p md-line style="height:0">&#160;</p>
     <md-input-container style="width:329px;">
-      <input type="text" class="task-input"
+      <textarea type="text" class="task-input"
              mdInput placeholder="Edit your dodo todo..."
              [(ngModel)]="task.label"
-             (keyup.enter)="save()">
+             (keyup.enter)="save()"></textarea>
     </md-input-container>
     <button md-mini-fab class="task-save-button" (click)="save()"><md-icon>save</md-icon></button>
-    <p md-line>&#160;</p>
   </div>
 </md-list-item>

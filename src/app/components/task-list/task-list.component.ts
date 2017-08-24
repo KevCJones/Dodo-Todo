@@ -16,6 +16,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
   tasks: Array<ITask> = [];
   subscription: Subscription;
   maxLength = 140;
+  inputting = false;
 
   constructor(public fb: FormBuilder, public taskService: TaskStoreService) { }
 
@@ -55,6 +56,10 @@ export class TaskListComponent implements OnInit, OnDestroy {
       task.done = !task.done;
       return task;
      });
+  }
+
+  setFocused(focus) {
+    this.inputting = focus;
   }
 
   ngOnDestroy() {
