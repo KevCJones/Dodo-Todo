@@ -23,6 +23,10 @@ module.exports = function (config) {
     angularCli: {
       environment: 'dev'
     },
+    files: [
+      // Include a Material theme in the test suite. ~@angular/material/prebuilt-themes/deeppurple-amber.css
+      {pattern: './node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css', included: true, watched: true},
+    ],
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
