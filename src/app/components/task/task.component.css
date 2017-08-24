@@ -1,58 +1,11 @@
-.row {
-  padding-bottom: 20px;
-}
-
-.task-done label span.task-label {
-  text-decoration: line-through;
-}
-
-.task-deleted {
-  text-decoration: line-through;
-  color: #aaa;
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.task-label {
-  margin-left: 10px;
-}
-
-.task-done .edit-btn, .task-deleted .edit-btn, .task-deleted .delete-btn {
-  pointer-events: none;
-  opacity: 0.2;
-}
-
-.task-item .checkbox label {
-  padding-top: 3px;
-  text-indent: -10px;
-  float: left
-}
-
-input[type="checkbox"] {
-  transform: scale(2, 2);
-  position: absolute;
-  top: 17%;
-}
-
-.task-item-edit {
-  padding: 5px 0;
-}
-
-.task-item-edit .task-input {
-  border: 1px solid #eee;
-  height: 33px;
-}
-
-.form-control {
-  border: 0 solid transparent;
-  box-shadow: none;
-}
-
-.checkbox.form-control{
-  display: inherit !important;
-}
-
-.checkbox.form-control label{
+.list-item {
   text-align: left;
-  padding-left: 40px !important;
+}
+
+.task-done ::ng-deep span{
+  text-decoration: line-through;
+}
+
+::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+  width: 400px;
 }

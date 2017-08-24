@@ -1,30 +1,16 @@
-<div class="container">
-  <div class="row">
-    <div class="col col-lg-8 col-lg-offset-2">
-      <form role="form" class="form input-group" [formGroup]="myForm" (ngSubmit)="createTask(myForm.value)">
-        <div class="field form-control">
-          <input #inputBox type="text" class="form-control add-task-input" placeholder="Enter a new task and press '+' or Enter" name="addItem[input]"
-            [formControl]="newItemControl">
-        </div>
-        <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary add-task-button floated right" [disabled]="!myForm.valid">
-            <span class="glyphicon glyphicon-plus glyph"></span>
-        </button>
-        </span>
-      </form>
-    </div>
-  </div>
-  <div class="col col-lg-8 col-lg-offset-2 input-hinter" *ngIf="inputBox.value.length">
-    <span *ngIf="inputBox.value.length <= maxLength">{{inputBox.value.length}} of 140 characters remaining</span>
-    <span *ngIf="inputBox.value.length > maxLength" class="error">This todo has gone the way of the dodo, its too long!</span>
-  </div>
-  <div class="col col-lg-8 col-lg-offset-2">
-    <div class="task-list-container container">
-      <app-task *ngFor="let task of tasks" [task]="task" (changed)="updateTask($event)"></app-task>
-    </div>
-  </div>
-  <div class="col col-lg-8 col-lg-offset-2" [class.hide-delete]="!canDeleteCompletedTasks()">
-    <button type="button" class="delete-completed-button btn btn-primary btn-lg btn-block" (click)="deleteCompletedTasks()">Remove Completed</button>
-  </div>
-
-</div>
+<form novalidate role="form" class="form input-group" [formGroup]="myForm" (ngSubmit)="createTask(myForm.value)">
+  <md-input-container style="width:500px;max-width:100%">
+    <input mdInput #inputBox name="addItem[input]" [formControl]="newItemControl" class="add-task-input" maxlength="140" placeholder="Todo...">
+    <md-hint align="end">{{inputBox.value.length}} / 140</md-hint>
+  </md-input-container>
+  <button type="submit" md-mini-fab class="add-task-button" [disabled]="!myForm.valid"><md-icon>add</md-icon></button>
+</form>
+<md-list class="task-list-container">
+  <app-task *ngFor="let task of tasks" [task]="task" (changed)="updateTask($event)"></app-task>
+</md-list>
+<md-toolbar class="fixed-bottom">
+  <button md-button color="primary" class="toggle-completed-button" (click)="toggleCompletedTasks()">Toggle all</button>
+  <button md-button color="primary" class="delete-completed-button" [disabled]="!canDeleteCompletedTasks()" (click)="deleteCompletedTasks()">Remove completed tasks</button>
+  <span class="example-spacer"></span>
+  <span class="tiny-text">Learning never ends &#9829; - Kevin Jones 2017</span>
+</md-toolbar>

@@ -38,11 +38,11 @@ export class AppPage {
   }
 
   getFirstTaskLabel() {
-    return element(by.css('.task-label'));
+    return element(by.css('.mat-checkbox-layout'));
   }
 
-  getDoneCheckboxes() {
-    return element.all(by.css('.done-checkbox'));
+  getClickablePartOfCheckboxes() {
+    return element.all(by.css('.mat-checkbox-inner-container'));
   }
 
   getTaskListEditingItems() {
