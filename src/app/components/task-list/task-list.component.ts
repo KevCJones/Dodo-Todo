@@ -50,6 +50,13 @@ export class TaskListComponent implements OnInit, OnDestroy {
     return this.tasks.filter(task => task.done ).length > 0;
   }
 
+  toggleCompletedTasks() {
+    this.taskService.tasks = this.tasks.map(task => {
+      task.done = !task.done;
+      return task;
+     });
+  }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
