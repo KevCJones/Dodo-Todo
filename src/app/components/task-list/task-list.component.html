@@ -9,11 +9,11 @@
   <app-task *ngFor="let task of tasks" [task]="task" (changed)="updateTask($event)"></app-task>
 </md-list>
 <md-toolbar class="fixed-bottom">
-  <md-toolbar-row>
-    <button md-button color="primary" class="toggle-completed-button" (click)="toggleCompletedTasks()">Toggle all</button>
-    <span class="example-spacer"></span>
-    <button md-button color="primary" class="delete-completed-button" [disabled]="!canDeleteCompletedTasks()" (click)="deleteCompletedTasks()">Remove done</button>
-  </md-toolbar-row>
+
+  <button md-button color="primary" class="toggle-completed-button" (click)="toggleCompletedTasks()">Toggle all</button>
+  <span class="example-spacer"></span>
+  <button md-button color="primary" class="delete-completed-button" [disabled]="!canDeleteCompletedTasks()" (click)="deleteCompletedTasks()">Remove done</button>
+
   <md-toolbar-row>
     <span class="tiny-text">Learning never ends &#9829; - Kevin Jones 2017</span>
   </md-toolbar-row>
