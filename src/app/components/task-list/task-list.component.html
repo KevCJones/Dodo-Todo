@@ -1,5 +1,5 @@
 <form novalidate role="form" class="form input-group" [formGroup]="myForm" (ngSubmit)="createTask(myForm.value)">
-  <md-input-container style="width:345px;max-width:100%">
+  <md-input-container style="width:305px;max-width:100%">
     <input mdInput #inputBox name="addItem[input]" [formControl]="newItemControl"
           (blur)="setFocused(false)" (focus)="setFocused(true)"
           class="add-task-input" maxlength="140" placeholder="Todo...">
@@ -11,6 +11,7 @@
   <app-task *ngFor="let task of tasks" [task]="task" (changed)="updateTask($event)" (focused)="setFocused($event)"></app-task>
 </md-list>
 <md-toolbar class="fixed-bottom" [class.hide]="inputting">
+
   <button md-button color="primary" class="toggle-completed-button" (click)="toggleCompletedTasks()">Toggle all</button>
   <span class="example-spacer"></span>
   <button md-button color="primary" class="delete-completed-button" [disabled]="!canDeleteCompletedTasks()" (click)="deleteCompletedTasks()">Remove done</button>
