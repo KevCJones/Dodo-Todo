@@ -1,3 +1,4 @@
+import { CustomMaterialModule } from './custom.material.module';
 import { environment } from './../environments/environment';
 import { Warehouse, WarehouseConfig, DRIVER_TYPE, NgxWarehouseModule } from 'ngx-warehouse';
 import { TaskStoreService } from './services/task-store/task-store.service';
@@ -14,7 +15,7 @@ config.storeName += '_unit_tests_only';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule, NgxWarehouseModule.configureWarehouse(config)],
+      imports: [FormsModule, ReactiveFormsModule, NgxWarehouseModule.configureWarehouse(config), CustomMaterialModule],
       providers: [TaskStoreService, Warehouse],
       declarations: [
         AppComponent,

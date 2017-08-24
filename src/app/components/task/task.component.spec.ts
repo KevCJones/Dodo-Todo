@@ -1,7 +1,9 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MdCheckbox } from '@angular/material';
+import { CustomMaterialModule } from './../../custom.material.module';
 import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
-
-
+import {By} from '@angular/platform-browser';
 import { TaskComponent } from './task.component';
 
 describe('TaskComponent', () => {
@@ -15,8 +17,10 @@ describe('TaskComponent', () => {
     saveButton: () => element.querySelector('.task-save-button'),
     editButton: () => element.querySelector('.edit-btn'),
     deleteButton: () => element.querySelector('.delete-btn'),
-    checkbox: () => element.querySelector('.done-checkbox'),
-    label: () => element.querySelector('.task-label'),
+    checkbox: () => fixture.debugElement.query(By.directive(MdCheckbox)).nativeElement,
+    checkboxLabel: () => <HTMLLabelElement>fixture.debugElement.query(By.directive(MdCheckbox)).nativeElement.querySelector('label'),
+    checkboxComponent: () => fixture.debugElement.query(By.directive(MdCheckbox)).componentInstance as MdCheckbox,
+    label: () => element.querySelector('.mat-checkbox-label'),
     sendInput: (inputElement: any, text: string) => {
       inputElement.value = text;
       inputElement.dispatchEvent(new Event('input'));
@@ -31,7 +35,7 @@ describe('TaskComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule],
+      imports: [FormsModule, BrowserAnimationsModule, CustomMaterialModule],
       declarations: [TaskComponent]
     })
       .compileComponents();
@@ -70,9 +74,9 @@ describe('TaskComponent', () => {
   });
 
   it('should have a checkbox that toggles done state', () => {
-    helpers.checkbox().click();
+    helpers.checkboxLabel().click();
     fixture.detectChanges();
-    expect(helpers.checkbox().checked).toBe(true);
+    expect(helpers.checkboxComponent().checked).toBe(true);
     expect(component.task.done).toBe(true);
   });
 
@@ -101,7 +105,7 @@ describe('TaskComponent', () => {
 
   it('should emit a change event when checkbox is clicked', () => {
     spyOn(component.changed, 'emit');
-    helpers.checkbox().click();
+    helpers.checkboxLabel().click();
     fixture.detectChanges();
     expect(component.changed.emit).toHaveBeenCalledWith(component.task);
   });

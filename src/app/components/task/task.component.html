@@ -1,28 +1,20 @@
 
-<div class="row">
-  <div *ngIf="!isEditing" class="task-item input-group col col-lg-8" [class.task-done]="done" [class.task-deleted]="task.deleted">
-    <div class="checkbox form-control">
-      <label><input class="done-checkbox" type="checkbox" [id]="'done-checkbox-'+task.id"
-          [(ngModel)]="done" [checked]="done"><span class="task-label">{{task.label}}</span></label>
-    </div>
-    <div class="input-group-btn">
-      <button class="btn btn-primary edit-btn btn-link" type="button" (click)="edit()">
-        <span class="glyphicon glyphicon-edit glyph"></span>
-      </button>
-      <button class="btn btn-secondary delete-btn btn-link" type="button" (click)="delete()">
-        <span class="glyphicon glyphicon-trash glyph"></span>
-      </button>
-    </div>
+<md-list-item class="list-item">
+  <div *ngIf="!isEditing" class="task-item" [class.task-done]="done" [class.task-deleted]="task.deleted">
+    <md-checkbox class="done-checkbox" [(ngModel)]="done">{{task.label}}</md-checkbox>
+    <button md-mini-fab class="edit-btn" (click)="edit()"><md-icon>edit</md-icon></button>
+    <button md-mini-fab class="delete-btn" (click)="delete()"><md-icon>delete</md-icon></button>
   </div>
-  <div *ngIf="isEditing" class="task-item-edit input-group col col-lg-8">
-    <input class="task-input form-control" type="text"
-          [(ngModel)]="task.label"
-          (keyup.enter)="save()">
-    <span class="input-group-btn">
-      <button class="btn btn-primary task-save-button" type="button" (click)="save()">
-        <span class="glyphicon glyphicon-ok glyph"></span>
-      </button>
-    </span>
+  <div *ngIf="isEditing" class="task-item-edit">
+    <p md-line>&#160;</p>
+    <p md-line>&#160;</p>
+    <md-input-container style="width:430px;">
+      <input type="text" class="task-input"
+             mdInput placeholder="Edit your dodo todo..."
+             [(ngModel)]="task.label"
+             (keyup.enter)="save()">
+    </md-input-container>
+    <button md-mini-fab class="task-save-button" (click)="save()"><md-icon>save</md-icon></button>
+    <p md-line>&#160;</p>
   </div>
-</div>
-
+</md-list-item>

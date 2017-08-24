@@ -1,4 +1,4 @@
-import { CustomMaterialModule } from './material.module';
+import { CustomMaterialModule } from './custom.material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TaskStoreModule } from './services/task-store/task-store.module';
 import { TaskListComponent } from './components/task-list/task-list.component';
@@ -8,7 +8,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import 'hammerjs';
 
 @NgModule({
   declarations: [

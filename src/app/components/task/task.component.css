@@ -1,0 +1,11 @@
+.list-item {
+  text-align: left;
+}
+
+.task-done ::ng-deep span{
+  text-decoration: line-through;
+}
+
+::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+  width: 400px;
+}
