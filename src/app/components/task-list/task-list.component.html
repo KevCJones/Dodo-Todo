@@ -1,5 +1,5 @@
 <form novalidate role="form" class="form input-group" [formGroup]="myForm" (ngSubmit)="createTask(myForm.value)">
-  <md-input-container style="width:380px;max-width:100%">
+  <md-input-container style="width:345px;max-width:100%">
     <input mdInput #inputBox name="addItem[input]" [formControl]="newItemControl" class="add-task-input" maxlength="140" placeholder="Todo...">
     <md-hint align="end">{{inputBox.value.length}} / 140</md-hint>
   </md-input-container>
