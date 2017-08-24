@@ -71,9 +71,11 @@ describe('dodo App', () => {
   });
 
   it('should mark tasks complete' , () => {
-    page.getDoneCheckboxes().click()
-    .then( () => {
-      expect(page.getDoneCheckboxes().first().isSelected()).toBe(true);
+    page.getClickablePartOfCheckboxes().click()
+    .then( () => page.getTaskListItems().first())
+    .then(item => item.getAttribute('class'))
+    .then(classes => {
+         expect(classes.split(' ').indexOf('task-done') !== -1).toBe(true);
     });
   });
 
@@ -85,6 +87,11 @@ describe('dodo App', () => {
       expect(page.getTaskListItems().count()).toEqual(0);
     });
 
+  });
+
+  it('should be back to original state' , () => {
+    expect(page.getSaveButton().isEnabled()).toBe(false);
+    expect(page.getTaskListItems().count()).toEqual(originalCount);
   });
 
 
