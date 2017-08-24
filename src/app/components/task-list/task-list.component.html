@@ -8,7 +8,7 @@
 <md-list class="task-list-container">
   <app-task *ngFor="let task of tasks" [task]="task" (changed)="updateTask($event)"></app-task>
 </md-list>
-<md-toolbar class="fixed-bottom">
+<md-toolbar class="fixed-bottom" [class.hide]="inputBox.value.length">
 
   <button md-button color="primary" class="toggle-completed-button" (click)="toggleCompletedTasks()">Toggle all</button>
   <span class="example-spacer"></span>
